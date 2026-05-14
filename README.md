@@ -1,45 +1,79 @@
-# Fine-tuning e Prompting Project con Hugging Face e Ollama
+README — Fine-Tuning T5
+# Fine-Tuning T5
 
-## Descrizione del progetto
-
-Questo progetto ha come obiettivo lo sviluppo e il fine-tuning di un modello linguistico (LLM) utilizzando strumenti moderni di Intelligenza Artificiale come Hugging Face Transformers e Ollama.
-
-L’obiettivo principale è comprendere il funzionamento pratico del fine-tuning, della generazione di testo e dell’inferenza locale di modelli linguistici.
+Questo progetto permette di fare il **fine-tuning di un modello T5** su un dataset personalizzato e poi usarlo per generare output tramite inferenza.
 
 ---
 
-# Obiettivi
+##  Cosa fa il progetto
 
-- Comprendere il funzionamento degli LLM
-- Eseguire il fine-tuning di un modello
-- Testare pipeline di prompting
-- Integrare il modello con Ollama
-- Analizzare i risultati ottenuti
-
----
-
-# Tecnologie utilizzate
-
-- Python
-- Hugging Face Transformers
-- PyTorch
-- Ollama
-- Dataset personalizzati
-- Fine-tuning supervisionato
+- Allena un modello T5 su un dataset personalizzato
+- Salva il modello addestrato
+- Permette di usare il modello per generare risposte (inferenza)
+- Include una pipeline semplice per training e test
 
 ---
 
-# Struttura del progetto
+##  Struttura del progetto
 
-```text
+
 fine_tuning/
-│
-├── train.py
-├── test_model.py
+|--- train.py → script per il training
+|--- dataset.py → caricamento dataset
+|---tokenizer.py → gestione tokenizzazione
+|--- config.py → parametri del modello
 
 ollama_pipeline/
-│
-├── pipeline.py
+|--- inference.py → esecuzione del modello
 
-README.md
-.gitignore
+data/
+|--- train.json → dataset training
+|--- eval.json → dataset valutazione
+
+outputs/
+|--- model/ → modello salvato dopo training
+
+
+---
+
+##  Installazione
+
+Installa le dipendenze:
+
+```bash
+pip install -r requirements.txt
+
+- Training del modello
+
+Per avviare il fine-tuning:
+
+python fine_tuning/train.py
+
+- Usare il modello (inferenza)
+
+Dopo il training, puoi generare output con:
+
+python ollama_pipeline/inference.py
+
+- Cosa devi fare prima di partire
+Assicurati che il dataset sia dentro la cartella data/
+Controlla i parametri nel file config.py
+Assicurati di avere installato PyTorch e Transformers
+
+- Output del progetto
+
+Dopo il training troverai il modello salvato in:
+
+outputs/model/
+
+- Requisiti
+Python 3.10+
+PyTorch
+Transformers (Hugging Face)
+Datasets
+
+- Flusso del progetto
+Prepari dataset
+Avvii training (train.py)
+Il modello viene salvato in outputs/model
+Usi inference.py per testarlo
